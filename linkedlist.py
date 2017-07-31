@@ -30,6 +30,56 @@ class LinkedList:
             current_node = current_node.next
         current_node.next = new_node
 
+    def size(self):
+        current_node = self.head
+        count = 0
+        while (current_node != None):
+            count += 1
+            current_node = current_node.next
+        return count
+
+    def isEmpty(self):
+        if (self.head is None):
+            return True
+        else:
+            return False
+
+    def valueAt(self, index):
+        current_node = self.head
+        i = 0
+        while (i<index and current_node):
+            current_node = current_node.next
+            i += 1
+        return current_node.data 
+
+    def popFront(self):
+        current_node = self.head
+        item = current_node.data
+        self.head = current_node.next
+        return item
+
+    def popBack(self):
+        current_node = self.head
+        prev_node = None
+        while (current_node.next is not None):
+            prev_node = current_node
+            current_node = current_node.next
+        prev_node.next = None
+        return current_node.data
+
+    def front(self):
+        if (self.head is None):
+            print ("Empty linked list")
+            return
+        return self.head.data
+
+    def back(self):
+        current_node = self.head
+        while (current_node.next is not None):
+            current_node = current_node.next
+        return current_node.data
+
+
     def printList(self):
         temp = self.head
         while (temp):
@@ -40,6 +90,8 @@ class LinkedList:
 
 if __name__=='__main__':
     llist = LinkedList()
+    print ("Is the linked list empty .. ", end='')
+    print (llist.isEmpty())
     llist.append(4)
     llist.push(11)
     llist.append(3)
@@ -47,3 +99,21 @@ if __name__=='__main__':
     llist.insertAfter(llist.head.next.next, 19)
     print ("Created linked list is ..")
     llist.printList()
+    k = llist.size()
+    print ("Size of the linked list is : ", end='')
+    print (k)
+    print ("Is the linked list empty .. ", end='')
+    print (llist.isEmpty())
+    a = llist.valueAt(3)
+    print ("Value at index 3 : ", end='')
+    print (a)
+    print ("Pop Front gives : ", end='')
+    print (llist.popFront())
+    print ("Pop Back gives : ", end='')
+    print (llist.popBack())
+    print ("Linked list thus far is...  ", end='')
+    llist.printList()
+    print ("Front : ", end='')
+    print (llist.front())
+    print ("Back : ", end='')
+    print (llist.back())
